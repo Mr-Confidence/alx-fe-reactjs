@@ -1,10 +1,13 @@
-const UserProfile = (props) => {
+function UserProfile() {
+  const { user } = useContext(UserContext); // Use the context to get the user data
+
   return (
-    <div>
-      <h2>{props.name}</h2>
-      <p>Age: {props.age}</p>
-      <p>Bio: {props.bio}</p>
+    <div style={{ padding: "20px" }}>
+      <h1>User Profile</h1>
+      <p>Name: {user.name}</p>
+      <p>Email: {user.email}</p>
     </div>
   );
-};
+}
+
 export default UserProfile;
