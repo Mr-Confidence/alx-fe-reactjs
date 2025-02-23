@@ -2,10 +2,10 @@ function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: "darkslateblue",
-        color: "whote",
+        backgroundColor: "#b744d5",
+        color: "white",
+        padding: "10px",
         textAlign: "center",
-        padding: "15px",
       }}
     >
       <p>© 2023 City Lovers</p>
