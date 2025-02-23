@@ -7,8 +7,13 @@ import Header from "./components/Header";
 import MainContent from "./components/MainContent";
 import Footer from "./components/Footer";
 import UserProfile from "./components/UserProfile";
+<<<<<<< HEAD
 import UserContext from "./UserContext";
 import ProfilePage from "./components/ProfilePage";
+=======
+import UserContext from "../UserContext";
+import ProfilePage from "./ProfilePage";
+>>>>>>> 6928c658967eeeac6f1cd4def775db509b8427b0
 
 function App() {
   const [count, setCount] = useState(0);
