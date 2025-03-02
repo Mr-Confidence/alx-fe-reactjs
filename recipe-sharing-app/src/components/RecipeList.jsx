@@ -2,8 +2,13 @@ import { Link } from "react-router-dom";
 import useRecipeStore from "./recipeStore";
 
 const RecipeList = () => {
-  //const recipes = useRecipeStore((state) => state.recipes);
+  // Access filtered recipes from the store
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
+
+  // Conditional rendering to ensure filteredRecipes is an array before mapping
+  if (!Array.isArray(filteredRecipes) || filteredRecipes.length === 0) {
+    return <p>No recipes found</p>;
+  }
 
   return (
     <div>
