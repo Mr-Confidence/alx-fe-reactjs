@@ -1,5 +1,7 @@
-import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
+import ProfileDetails from "./ProfileDetails";
+import ProfileSettings from "./ProfileSettings";
 
 const Profile = () => {
   const location = useLocation();
@@ -21,7 +23,11 @@ const Profile = () => {
         </Link>
       </nav>
       <div>
-        <Outlet />
+        <Routes>
+          <Route index element={<ProfileDetails />} />
+          <Route path="details" element={<ProfileDetails />} />
+          <Route path="settings" element={<ProfileSettings />} />
+        </Routes>
       </div>
     </div>
   );
