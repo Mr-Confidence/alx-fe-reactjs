@@ -1,12 +1,50 @@
-# React + Vite
+# Form Handling in React with Controlled Components and Formik
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project demonstrates how to handle forms in React using two approaches:
+1. **Controlled Components**: Managing form state manually using React's `useState`.
+2. **Formik**: A popular library for simplifying form handling, validation, and error management.
 
-Currently, two official plugins are available:
+The project includes a user registration form with fields for `username`, `email`, and `password`. It also integrates basic validation and simulates form submission to a mock API.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Table of Contents
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Setup and Installation](#setup-and-installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [License](#license)
+
+---
+
+## Features
+
+- **Controlled Components**:
+  - Manual state management using `useState`.
+  - Basic validation to ensure no fields are left empty.
+- **Formik**:
+  - Built-in state management and form handling.
+  - Validation using Yup schema.
+  - Error messages for invalid inputs.
+- Simulated API submission for user registration.
+
+---
+
+## Technologies Used
+
+- **React**: A JavaScript library for building user interfaces.
+- **Formik**: A library for building forms in React.
+- **Yup**: A schema validation library for form validation.
+- **Vite**: A fast build tool for modern web development.
+
+---
+
+## Setup and Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/alx-fe-reactjs.git
+   cd alx-fe-reactjs/form-handling-react
