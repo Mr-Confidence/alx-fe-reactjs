@@ -3,17 +3,18 @@ import React, { useState } from "react";
 const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [steps, setSteps] = useState("");
   const [error, setError] = useState("");
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleIngredientsChange = (e) => setIngredients(e.target.value);
-  const handleInstructionsChange = (e) => setInstructions(e.target.value);
+  const handleStepsChange = (e) => setSteps(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!title || !ingredients || !instructions) {
+    // Validation logic
+    if (!title || !ingredients || !steps) {
       setError("All fields are required.");
       return;
     }
@@ -32,23 +33,21 @@ const AddRecipeForm = () => {
     const newRecipe = {
       title,
       ingredients: ingredientsList,
-      instructions: instructions.split("\n").map((step) => step.trim()),
+      steps: steps
+        .split("\n")
+        .map((step) => step.trim())
+        .filter((step) => step !== ""),
     };
 
     console.log("New Recipe Submitted:", newRecipe);
 
     setTitle("");
     setIngredients("");
-    setInstructions("");
+    setSteps("");
   };
 
   return (
-    <div
-      className="container mx-auto px-4 py-8 bg-cover bg-center min-h-screen"
-      style={{
-        backgroundImage: 'url("https://www.example.com/your-image.jpg")',
-      }}
-    >
+    <div className="container mx-auto px-4 py-8 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 min-h-screen">
       <h2 className="text-3xl font-semibold text-center text-white mb-6">
         Add a New Recipe
       </h2>
@@ -57,7 +56,7 @@ const AddRecipeForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 bg-opacity-75"
+        className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6"
       >
         <div className="mb-4">
           <label htmlFor="title" className="block text-lg font-semibold mb-2">
@@ -91,18 +90,15 @@ const AddRecipeForm = () => {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="instructions"
-            className="block text-lg font-semibold mb-2"
-          >
-            Instructions
+          <label htmlFor="steps" className="block text-lg font-semibold mb-2">
+            Preparation Steps
           </label>
           <textarea
-            id="instructions"
-            value={instructions}
-            onChange={handleInstructionsChange}
+            id="steps"
+            value={steps}
+            onChange={handleStepsChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter cooking instructions"
+            placeholder="Enter preparation steps (one per line)"
             rows="5"
           />
         </div>
