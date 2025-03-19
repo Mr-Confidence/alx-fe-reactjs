@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-// Import data directly from the src folder
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import data from "../data.json";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
 
-  // Use the imported data directly in useEffect
   useEffect(() => {
-    // Directly set the imported data into state
     setRecipes(data);
   }, []);
 
@@ -28,6 +26,13 @@ const HomePage = () => {
             <div className="p-4">
               <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
               <p className="text-gray-600">{recipe.summary}</p>
+              {/* Add Link to navigate to the RecipeDetail page */}
+              <Link
+                to={`/recipe/${recipe.id}`} // Use the recipe ID in the URL
+                className="text-blue-500 hover:text-blue-700 mt-4 inline-block"
+              >
+                View Recipe
+              </Link>
             </div>
           </div>
         ))}

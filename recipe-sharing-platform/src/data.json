@@ -1,14 +1,289 @@
 [
-    {
-      "id": 1,
-      "title": "Spaghetti Carbonara",
-      "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 2,
-      "title": "Chicken Tikka Masala",
-      "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-      "image": "https://via.placeholder.com/150"
-    }
-  ]
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g spaghetti",
+      "100g pancetta",
+      "2 eggs",
+      "50g Parmesan cheese",
+      "Black pepper"
+    ],
+    "instructions": [
+      "Cook the spaghetti in salted water.",
+      "Fry the pancetta in a pan until crispy.",
+      "Beat the eggs and mix with Parmesan cheese.",
+      "Toss the pasta with pancetta, and then mix in the egg mixture.",
+      "Serve with freshly cracked black pepper."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Chicken Tikka Masala",
+    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breast",
+      "1 onion, chopped",
+      "200g tomato paste",
+      "200ml heavy cream",
+      "Spices: cumin, coriander, paprika"
+    ],
+    "instructions": [
+      "Marinate the chicken with spices and yogurt.",
+      "Grill or pan-fry the chicken until cooked.",
+      "Make the sauce by sautéing onions and adding tomato paste and cream.",
+      "Simmer the chicken in the sauce until well coated.",
+      "Serve with rice or naan bread."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Beef Tacos",
+    "summary": "Soft or hard shell tacos filled with seasoned ground beef, lettuce, cheese, and salsa.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g ground beef",
+      "Taco seasoning",
+      "Taco shells",
+      "Lettuce, shredded",
+      "Cheese, grated",
+      "Salsa"
+    ],
+    "instructions": [
+      "Cook the ground beef in a pan until browned.",
+      "Add taco seasoning and water, simmer until thickened.",
+      "Fill taco shells with beef, lettuce, cheese, and salsa.",
+      "Serve immediately."
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Vegetable Stir Fry",
+    "summary": "A quick and healthy dish made with a variety of vegetables stir-fried in soy sauce.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g broccoli, chopped",
+      "1 bell pepper, sliced",
+      "2 carrots, julienned",
+      "2 tablespoons soy sauce",
+      "1 tablespoon sesame oil"
+    ],
+    "instructions": [
+      "Heat sesame oil in a pan.",
+      "Add vegetables and stir-fry for 5-7 minutes.",
+      "Add soy sauce and cook for another 2 minutes.",
+      "Serve hot with rice or noodles."
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Chocolate Chip Cookies",
+    "summary": "Classic cookies loaded with chocolate chips, perfect for any occasion.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g butter, softened",
+      "150g sugar",
+      "1 egg",
+      "300g flour",
+      "200g chocolate chips"
+    ],
+    "instructions": [
+      "Preheat the oven to 180°C (350°F).",
+      "Cream together butter and sugar until light and fluffy.",
+      "Beat in the egg, then stir in flour and chocolate chips.",
+      "Drop spoonfuls of dough onto a baking sheet.",
+      "Bake for 10-12 minutes until golden."
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Caesar Salad",
+    "summary": "A classic salad with romaine lettuce, croutons, and Caesar dressing.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "1 head romaine lettuce, chopped",
+      "50g croutons",
+      "50g Parmesan cheese, grated",
+      "Caesar dressing"
+    ],
+    "instructions": [
+      "In a large bowl, combine lettuce, croutons, and cheese.",
+      "Drizzle with Caesar dressing and toss to coat.",
+      "Serve immediately."
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Pancakes",
+    "summary": "Fluffy pancakes served with syrup, fruit, or whipped cream.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g flour",
+      "2 eggs",
+      "300ml milk",
+      "50g sugar",
+      "1 teaspoon baking powder"
+    ],
+    "instructions": [
+      "In a bowl, mix flour, sugar, and baking powder.",
+      "In another bowl, whisk eggs and milk together.",
+      "Combine wet and dry ingredients until smooth.",
+      "Pour batter onto a hot griddle and cook until bubbles form.",
+      "Flip and cook until golden brown."
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Margarita Pizza",
+    "summary": "A simple pizza topped with tomato sauce, mozzarella cheese, and fresh basil.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "1 pizza base",
+      "200g tomato sauce",
+      "200g mozzarella cheese, sliced",
+      "Fresh basil leaves"
+    ],
+    "instructions": [
+      "Preheat the oven to 220°C (428°F).",
+      "Spread tomato sauce over the pizza base.",
+      "Top with mozzarella slices and basil leaves.",
+      "Bake for 10-15 minutes until the cheese is bubbly.",
+      "Slice and serve hot."
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Beef Stroganoff",
+    "summary": "Tender strips of beef cooked in a creamy mushroom sauce, served over noodles.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g beef, sliced",
+      "200g mushrooms, sliced",
+      "1 onion, chopped",
+      "200ml sour cream",
+      "300g egg noodles"
+    ],
+    "instructions": [
+      "Cook egg noodles according to package instructions.",
+      "In a pan, sauté onions and mushrooms until soft.",
+      "Add beef and cook until browned.",
+      "Stir in sour cream and simmer for 5 minutes.",
+      "Serve over cooked noodles."
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Greek Salad",
+    "summary": "A refreshing salad with tomatoes, cucumbers, olives, and feta cheese.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "2 tomatoes, chopped",
+      "1 cucumber, sliced",
+      "50g olives",
+      "100g feta cheese, crumbled",
+      "Olive oil and lemon juice"
+    ],
+    "instructions": [
+      "In a bowl, combine tomatoes, cucumber, olives, and feta.",
+      "Drizzle with olive oil and lemon juice.",
+      "Toss gently to combine.",
+      "Serve chilled."
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Lemon Chicken",
+    "summary": "Chicken breasts cooked in a lemony sauce, served with rice or vegetables.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g chicken breasts",
+      "2 lemons, juiced",
+      "2 tablespoons olive oil",
+      "1 teaspoon garlic powder",
+      "Salt and pepper"
+    ],
+    "instructions": [
+      "Marinate chicken in lemon juice, olive oil, garlic powder, salt, and pepper.",
+      "Cook chicken in a pan until golden brown.",
+      "Serve with rice or steamed vegetables."
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Fish Tacos",
+    "summary": "Tacos filled with grilled fish, cabbage slaw, and a creamy sauce.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g white fish fillets",
+      "Taco seasoning",
+      "Taco shells",
+      "Cabbage, shredded",
+      "Creamy sauce (sour cream, lime juice)"
+    ],
+    "instructions": [
+      "Season fish with taco seasoning and grill until cooked.",
+      "Fill taco shells with fish, cabbage slaw, and creamy sauce.",
+      "Serve immediately."
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Stuffed Bell Peppers",
+    "summary": "Bell peppers stuffed with a mixture of rice, ground meat, and spices.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "4 bell peppers, halved",
+      "300g ground beef",
+      "200g cooked rice",
+      "1 onion, chopped",
+      "Tomato sauce"
+    ],
+    "instructions": [
+      "Preheat the oven to 180°C (350°F).",
+      "In a pan, sauté onions and ground beef until browned.",
+      "Mix in cooked rice and tomato sauce.",
+      "Stuff the bell pepper halves with the mixture.",
+      "Bake for 30 minutes until peppers are tender."
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Pesto Pasta",
+    "summary": "Pasta tossed with a fresh basil pesto sauce, topped with Parmesan cheese.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "200g pasta of choice",
+      "100g basil pesto",
+      "50g Parmesan cheese, grated",
+      "Salt and pepper"
+    ],
+    "instructions": [
+      "Cook pasta according to package instructions.",
+      "Drain and toss with basil pesto.",
+      "Serve topped with grated Parmesan cheese."
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Chili Con Carne",
+    "summary": "A spicy stew made with ground beef, beans, tomatoes, and chili spices.",
+    "image": "https://via.placeholder.com/150",
+    "ingredients": [
+      "500g ground beef",
+      "1 can kidney beans",
+      "1 can diced tomatoes",
+      "1 onion, chopped",
+      "Chili powder"
+    ],
+    "instructions": [
+      "In a pot, sauté onions until soft.",
+      "Add ground beef and cook until browned.",
+      "Stir in kidney beans, diced tomatoes, and chili powder.",
+      "Simmer for 20-30 minutes.",
+      "Serve with rice or bread."
+    ]
+  }
+]
