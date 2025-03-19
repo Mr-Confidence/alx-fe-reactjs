@@ -90,10 +90,10 @@ const AddRecipeForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6"
+        className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 grid md:grid-cols-2 gap-6"
       >
         {/* Recipe Title */}
-        <div className="mb-4">
+        <div className="col-span-2">
           <label htmlFor="title" className="block text-lg font-semibold mb-2">
             Recipe Title
           </label>
@@ -110,7 +110,7 @@ const AddRecipeForm = () => {
         </div>
 
         {/* Ingredients */}
-        <div className="mb-4">
+        <div className="col-span-2">
           <label
             htmlFor="ingredients"
             className="block text-lg font-semibold mb-2"
@@ -130,7 +130,7 @@ const AddRecipeForm = () => {
         </div>
 
         {/* Preparation Steps */}
-        <div className="mb-4">
+        <div className="col-span-2">
           <label htmlFor="steps" className="block text-lg font-semibold mb-2">
             Preparation Steps
           </label>
@@ -147,7 +147,7 @@ const AddRecipeForm = () => {
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-center">
+        <div className="col-span-2 flex justify-center">
           <button
             type="submit"
             className="w-full py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
