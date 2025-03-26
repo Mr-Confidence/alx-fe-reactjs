@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_GITHUB_API_KEY;
+const SEARCH_USERS_URL = "https://api.github.com/search/users?q"; // ✅ Exact URL
 
 const api = axios.create({
-  baseURL: "https://api.github.com/",
   headers: {
     Authorization: `token ${API_KEY}`,
     Accept: "application/vnd.github.v3+json",
@@ -13,7 +13,15 @@ const api = axios.create({
 // ✅ Fetch user data by username
 export const fetchUserData = async (username) => {
   try {
-    const response = await api.get(`/users/${username}`);
+    const response = await axios.get(
+      `https://api.github.com/users/${username}`,
+      {
+        headers: {
+          Authorization: `token ${API_KEY}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
@@ -24,7 +32,7 @@ export const fetchUserData = async (username) => {
   }
 };
 
-// ✅ Advanced search with username, location, repo count & pagination
+// ✅ Advanced search using the exact URL
 export const fetchAdvancedUserData = async ({
   username = "",
   location = "",
@@ -33,19 +41,25 @@ export const fetchAdvancedUserData = async ({
   perPage = 10,
 }) => {
   try {
-    let query = [];
+    let queryParts = [];
 
-    if (username) query.push(`user:${username}`);
-    if (location) query.push(`location:${location}`);
-    if (minRepos) query.push(`repos:>=${minRepos}`);
+    if (username) queryParts.push(`user:${username}`);
+    if (location) queryParts.push(`location:${location}`);
+    if (minRepos) queryParts.push(`repos:>=${minRepos}`);
 
-    if (query.length === 0) {
+    if (queryParts.length === 0) {
       throw new Error("At least one search criteria is required.");
     }
 
-    const searchQuery = query.join("+");
-    const response = await api.get(
-      `/search/users?q=${searchQuery}&page=${page}&per_page=${perPage}`
+    const searchQuery = queryParts.join("+");
+    const response = await axios.get(
+      `${SEARCH_USERS_URL}${searchQuery}&page=${page}&per_page=${perPage}`, // ✅ Using the exact URL
+      {
+        headers: {
+          Authorization: `token ${API_KEY}`,
+          Accept: "application/vnd.github.v3+json",
+        },
+      }
     );
 
     return response.data.items.map((user) => ({
