@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getGithubUsers } from "../services/Api";
+import { getGithubUsers } from "../services/githubService";
 import "../style/index.css";
 
 const UserList = () => {
