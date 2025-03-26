@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getGithubUsers } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 import "../style/index.css";
 
 const UserList = () => {
@@ -10,8 +10,13 @@ const UserList = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await getGithubUsers();
-        setUsers(data);
+        const username = "octocat";
+        if (username) {
+          const data = await fetchUserData(username);
+          setUsers([data]);
+        } else {
+          setError("Username is required!");
+        }
       } catch (err) {
         setError("Error fetching GitHub users.");
       } finally {

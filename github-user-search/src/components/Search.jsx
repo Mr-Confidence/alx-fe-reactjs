@@ -1,56 +1,56 @@
 import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 import "../style/index.css";
+
 const Search = () => {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
-  const handleInputChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
+    setError("");
     setUserData(null);
 
     try {
-      const data = await fetchUserData(username);
-      setUserData(data);
+      const user = await fetchUserData(username);
+
+      if (!user) {
+        setError("Looks like we can't find the user.");
+      } else {
+        setUserData(user);
+      }
     } catch (err) {
-      setError("Looks like we can't find the user.");
-    } finally {
+      setError("Something went wrong, please try again.");
+      console.error("Error during fetch:", err);
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h1>Search for GitHub User</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="search-container">
+      <h2>Search GitHub User</h2>
+      <form onSubmit={handleSearch}>
         <input
           type="text"
+          placeholder="Enter GitHub Username"
           value={username}
-          onChange={handleInputChange}
-          placeholder="Enter GitHub username"
+          onChange={(e) => setUsername(e.target.value)}
         />
-        <button type="submit">Search</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Search"}
+        </button>
       </form>
-
-      {loading && <p>Loading...</p>}
-
-      {error && <p>{error}</p>}
-
-      {userData && !loading && !error && (
-        <div>
-          <h2>{userData.name}</h2>
-          <img src={userData.avatar_url} alt={userData.login} width="100" />
+      {error && <p className="error-message">{error}</p>}
+      {userData && (
+        <div className="user-info">
+          <img src={userData.avatar_url} alt={userData.login} width={100} />
+          <h3>{userData.name}</h3>
           <p>{userData.bio}</p>
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-            Visit Profile
+            Visit GitHub Profile
           </a>
         </div>
       )}

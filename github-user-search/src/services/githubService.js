@@ -1,25 +1,25 @@
 import axios from "axios";
 
-// API service to fetch a list of GitHub users
-export const getGithubUsers = async () => {
-  try {
-    const response = await axios.get("https://api.github.com/users");
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching GitHub users:", error);
-    throw new Error("Unable to fetch users.");
-  }
-};
+const API_KEY = import.meta.env.VITE_GITHUB_API_KEY;
 
-// GitHub API endpoint for user search (for the Search component)
+const api = axios.create({
+  baseURL: "https://api.github.com/",
+  headers: {
+    Authorization: `token ${API_KEY}`,
+  },
+});
+
 export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(
-      `https://api.github.com/users/${username}`
-    );
+    const response = await api.get(`/users/${username}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
-    throw new Error("User not found.");
+
+    if (error.response && error.response.status === 404) {
+      return null;
+    }
+
+    throw new Error("API request failed: " + error.message);
   }
 };
