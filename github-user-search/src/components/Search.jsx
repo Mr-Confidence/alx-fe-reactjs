@@ -10,21 +10,30 @@ const Search = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    const trimmedUsername = username.trim();
+
+    if (!trimmedUsername) {
+      setError("Username cannot be empty.");
+      return;
+    }
+
     setLoading(true);
     setError("");
     setUserData(null);
 
     try {
-      const user = await fetchUserData(username);
+      const user = await fetchUserData(trimmedUsername);
 
-      if (!user) {
+      if (!user || user.message === "Not Found") {
         setError("Looks like we can't find the user.");
+        setUserData(null);
       } else {
         setUserData(user);
       }
     } catch (err) {
       setError("Something went wrong, please try again.");
       console.error("Error during fetch:", err);
+    } finally {
       setLoading(false);
     }
   };
