@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_GITHUB_API_KEY;
-const SEARCH_USERS_URL = "https://api.github.com/search/users?q"; // ✅ Exact URL
+const SEARCH_USERS_URL = "https://api.github.com/search/users?q=";
 
 const api = axios.create({
   headers: {
@@ -10,29 +10,36 @@ const api = axios.create({
   },
 });
 
-// ✅ Fetch user data by username
 export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(
-      `https://api.github.com/users/${username}`,
-      {
-        headers: {
-          Authorization: `token ${API_KEY}`,
-          Accept: "application/vnd.github.v3+json",
-        },
-      }
-    );
+    const response = await api.get(`https://api.github.com/users/${username}`); // ✅ Correct URL
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
-    if (error.response?.status === 404) {
-      return null;
-    }
-    throw new Error("API request failed: " + error.message);
+    return error.response?.status === 404 ? null : Promise.reject(error);
   }
 };
 
-// ✅ Advanced search using the exact URL
+export const fetchUserDetails = async (username) => {
+  try {
+    const response = await api.get(`/users/${username}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user details:", error);
+    return null;
+  }
+};
+
+export const searchUsers = async (query) => {
+  try {
+    const response = await api.get(`${SEARCH_USERS_URL}${query}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error searching users:", error);
+    return { items: [] };
+  }
+};
+
 export const fetchAdvancedUserData = async ({
   username = "",
   location = "",
@@ -43,23 +50,17 @@ export const fetchAdvancedUserData = async ({
   try {
     let queryParts = [];
 
-    if (username) queryParts.push(`user:${username}`);
+    if (username) queryParts.push(username);
     if (location) queryParts.push(`location:${location}`);
     if (minRepos) queryParts.push(`repos:>=${minRepos}`);
 
     if (queryParts.length === 0) {
-      throw new Error("At least one search criteria is required.");
+      throw new Error("At least one search criterion is required.");
     }
 
     const searchQuery = queryParts.join("+");
-    const response = await axios.get(
-      `${SEARCH_USERS_URL}${searchQuery}&page=${page}&per_page=${perPage}`, // ✅ Using the exact URL
-      {
-        headers: {
-          Authorization: `token ${API_KEY}`,
-          Accept: "application/vnd.github.v3+json",
-        },
-      }
+    const response = await api.get(
+      `${SEARCH_USERS_URL}${searchQuery}&page=${page}&per_page=${perPage}`
     );
 
     return response.data.items.map((user) => ({

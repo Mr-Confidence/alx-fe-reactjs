@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { searchUsers } from "../services/githubService";
+import { searchUsers, fetchUserDetails } from "../services/githubService"; // ✅ Import both functions
+
 const Search = () => {
   const [query, setQuery] = useState("");
   const [users, setUsers] = useState([]);
@@ -19,7 +20,15 @@ const Search = () => {
     try {
       const data = await searchUsers(query);
       if (data.items) {
-        setUsers(data.items);
+        // Fetch additional details (location) for each user
+        const usersWithDetails = await Promise.all(
+          data.items.map(async (user) => {
+            const details = await fetchUserDetails(user.login);
+            return { ...user, location: details.location };
+          })
+        );
+
+        setUsers(usersWithDetails);
       } else {
         setError("No users found.");
       }
@@ -72,6 +81,9 @@ const Search = () => {
               <h2 className="text-xl font-semibold text-center mt-4">
                 {user.login}
               </h2>
+              <p className="text-sm text-gray-600 text-center">
+                {user.location || "No location provided"}
+              </p>
               <div className="mt-4 flex justify-center">
                 <a
                   href={user.html_url}
