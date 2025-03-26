@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import UserList from "./components/UserList";
 import Header from "./components/Header";
+import UserList from "./components/UserList";
+import Search from "./components/Search";
+import "./style/index.css";
 
 const App = () => {
   return (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<UserList />} /> {/* Root route */}
-        <Route path="/users" element={<UserList />} />{" "}
-        {/* Define the /users route */}
+        <Route path="/users" element={<UserList />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </Router>
   );
