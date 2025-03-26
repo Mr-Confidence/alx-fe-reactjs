@@ -22,7 +22,7 @@ export const fetchUserData = async (username) => {
 
 export const fetchUserDetails = async (username) => {
   try {
-    const response = await api.get(`/users/${username}`);
+    const response = await api.get(`https://api.github.com/users/${username}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching user details:", error);

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { searchUsers, fetchUserDetails } from "../services/githubService"; // ✅ Import both functions
+import { searchUsers, fetchUserData } from "../services/githubService"; // ✅ Use fetchUserData instead
 
 const Search = () => {
   const [query, setQuery] = useState("");
@@ -23,7 +23,7 @@ const Search = () => {
         // Fetch additional details (location) for each user
         const usersWithDetails = await Promise.all(
           data.items.map(async (user) => {
-            const details = await fetchUserDetails(user.login);
+            const details = await fetchUserData(user.login); // ✅ Updated function
             return { ...user, location: details.location };
           })
         );
