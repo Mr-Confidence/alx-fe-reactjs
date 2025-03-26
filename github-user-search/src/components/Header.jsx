@@ -8,7 +8,6 @@ const Header = () => {
     <header className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <Link
             to="/"
             className="text-2xl font-extrabold tracking-wide no-underline"
@@ -19,7 +18,6 @@ const Header = () => {
             Search
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-6">
             <Link
               to="/users"
@@ -35,7 +33,6 @@ const Header = () => {
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden focus:outline-none"
             onClick={() => setIsOpen(!isOpen)}
@@ -49,7 +46,6 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-blue-700 py-2 space-y-2">
           <Link
