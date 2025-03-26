@@ -10,6 +10,7 @@ const api = axios.create({
   },
 });
 
+// ✅ Fetch Single User Data
 export const fetchUserData = async (username) => {
   try {
     const response = await api.get(`/users/${username}`);
@@ -25,25 +26,26 @@ export const fetchUserData = async (username) => {
   }
 };
 
+// ✅ Fetch Advanced User Data (Search)
 export const fetchAdvancedUserData = async (
-  username,
-  location,
-  minRepos,
+  username = "",
+  location = "",
+  minRepos = "",
   page = 1,
   perPage = 10
 ) => {
   try {
-    let query = [];
+    let queryParts = [];
 
-    if (username) query.push(`user:${username}`);
-    if (location) query.push(`location:${location}`);
-    if (minRepos) query.push(`repos:>=${minRepos}`);
+    if (username) queryParts.push(username); // 🔄 Removed `user:` as it's incorrect.
+    if (location) queryParts.push(`location:${location}`);
+    if (minRepos) queryParts.push(`repos:>=${minRepos}`);
 
-    if (query.length === 0) {
-      throw new Error("At least one search criteria is required.");
+    if (queryParts.length === 0) {
+      throw new Error("At least one search criterion is required.");
     }
 
-    const searchQuery = query.join("+");
+    const searchQuery = queryParts.join("+");
     const response = await api.get(
       `/search/users?q=${searchQuery}&page=${page}&per_page=${perPage}`
     );
