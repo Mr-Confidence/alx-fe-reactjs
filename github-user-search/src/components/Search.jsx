@@ -3,11 +3,14 @@ import { searchUsers, fetchUserData } from "../services/githubService"; // ✅ U
 
 const Search = () => {
   const [query, setQuery] = useState("");
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]); // Stores users from search
+  const [userDetails, setUserDetails] = useState([]); // Stores detailed user data (location, etc.)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSearch = async () => {
+  // Handle the form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent page reload
     if (!query.trim()) {
       setError("Please enter a search term.");
       return;
@@ -15,7 +18,8 @@ const Search = () => {
 
     setLoading(true);
     setError(null);
-    setUsers([]);
+    setUsers([]); // Clear previous search results
+    setUserDetails([]); // Clear previous detailed data
 
     try {
       const data = await searchUsers(query);
@@ -23,14 +27,20 @@ const Search = () => {
         // Fetch additional details (location) for each user
         const usersWithDetails = await Promise.all(
           data.items.map(async (user) => {
-            const details = await fetchUserData(user.login); // ✅ Updated function
-            return { ...user, location: details.location };
+            try {
+              const details = await fetchUserData(user.login); // ✅ Fetch more details like location
+              return { ...user, location: details.location }; // Merge with location
+            } catch (err) {
+              console.error(`Error fetching data for user ${user.login}:`, err);
+              return { ...user, location: "Location not available" }; // Fallback on error
+            }
           })
         );
 
-        setUsers(usersWithDetails);
+        setUsers(data.items);
+        setUserDetails(usersWithDetails); // Store detailed info separately
       } else {
-        setError("No users found.");
+        setError("Looks like we cant find the user");
       }
     } catch (err) {
       console.error("Error fetching users:", err);
@@ -46,7 +56,7 @@ const Search = () => {
         GitHub User Search
       </h1>
 
-      <div className="flex justify-center gap-4 mb-6">
+      <form onSubmit={handleSubmit} className="flex justify-center gap-4 mb-6">
         <input
           type="text"
           placeholder="Search for GitHub users..."
@@ -55,12 +65,12 @@ const Search = () => {
           className="p-2 border border-gray-300 rounded-md w-80"
         />
         <button
-          onClick={handleSearch}
+          type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
         >
           Search
         </button>
-      </div>
+      </form>
 
       {loading && <p className="text-center text-gray-500">Loading...</p>}
 
@@ -68,35 +78,43 @@ const Search = () => {
 
       {users.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {users.map((user) => (
-            <div
-              key={user.id}
-              className="bg-white shadow-md rounded-lg p-6 transition transform hover:scale-105 hover:shadow-xl"
-            >
-              <img
-                src={user.avatar_url}
-                alt={user.login}
-                className="w-24 h-24 rounded-full mx-auto border-4 border-blue-500"
-              />
-              <h2 className="text-xl font-semibold text-center mt-4">
-                {user.login}
-              </h2>
-              <p className="text-sm text-gray-600 text-center">
-                {user.location || "No location provided"}
-              </p>
-              <div className="mt-4 flex justify-center">
-                <a
-                  href={user.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition"
-                >
-                  View Profile
-                </a>
+          {users.map((user) => {
+            const detailedUser = userDetails.find((u) => u.id === user.id) || {};
+            return (
+              <div
+                key={user.id}
+                className="bg-white shadow-md rounded-lg p-6 transition transform hover:scale-105 hover:shadow-xl"
+              >
+                <img
+                  src={user.avatar_url}
+                  alt={user.login}
+                  className="w-24 h-24 rounded-full mx-auto border-4 border-blue-500"
+                />
+                <h2 className="text-xl font-semibold text-center mt-4">
+                  {user.login}
+                </h2>
+                <p className="text-sm text-gray-600 text-center">
+                  {detailedUser.location || "No location provided"}
+                </p>
+                <div className="mt-4 flex justify-center">
+                  <a
+                    href={user.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition"
+                  >
+                    View Profile
+                  </a>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+      )}
+
+      {/* If no users found, show the message */}
+      {users.length === 0 && !loading && !error && (
+        <p className="text-center text-gray-500">Looks like we can't find the user.</p>
       )}
     </div>
   );
